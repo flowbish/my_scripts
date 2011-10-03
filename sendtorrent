@@ -1,10 +1,6 @@
 #!/bin/sh
 
-remotedir="192.168.1.11:/var/torrents/watch"
-#if [[ "$2" != "" ]]
-#then
-#    remotedir="$2"
-#fi
+remotedir="tobias:/var/torrents/watch"
 
 remotepath=${remotedir}/$(echo $(basename "$1") | tr " " "\b" | head -c16):$(echo $(date) | md5sum | tr " =-" "\b" | head -c8).torrent
 echo Sending $(basename "$1")
