@@ -1,0 +1,13 @@
+#!/bin/sh
+
+tmpdir=temp_dir
+
+mkdir $tmpdir
+mv $1 $tmpdir
+cd $tmpdir
+unrar e *.cbr > /dev/null
+mv *.cbr ..
+zip $(basename $1 .cbr) * > /dev/null
+mv *.zip ../$(basename $1 .cbr).cbz
+cd ..
+rm -rf $tmpdir

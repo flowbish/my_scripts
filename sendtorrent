@@ -1,0 +1,12 @@
+#!/bin/sh
+
+remotedir="192.168.1.11:/var/torrents/watch"
+#if [[ "$2" != "" ]]
+#then
+#    remotedir="$2"
+#fi
+
+remotepath=${remotedir}/$(echo $(basename "$1") | tr " " "\b" | head -c16):$(echo $(date) | md5sum | tr " =-" "\b" | head -c8).torrent
+echo Sending $(basename "$1")
+echo to ${remotepath}
+scp "$1" ${remotepath} && rm "$1"

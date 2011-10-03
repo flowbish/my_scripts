@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+import sys,os,urllib2,re
+
+if (len(sys.argv) == 2):
+    album=sys.argv[1]
+    if len(album)==5:
+        if not os.path.isdir(album):
+	    os.mkdir(album)
+        u=urllib2.urlopen('http://imgur.com/a/'+album).read()
+        r=re.compile('"hash":"(.{5})"')
+	for hash in r.findall(u):
+            image = urllib2.urlopen('http://i.imgur.com/'+hash+'.jpg').read()
+            with open(os.path.join(album,hash+'.jpg'),'w') as file:
+	        file.write(image)
+    else:
+        name=re.search('(?<=imgur.com/)([^ ]*)',album).group()
+        if not os.path.isdir(name):
+	    os.mkdir(name)
+        u=urllib2.urlopen(album).read()
+        r=re.compile('"hash":"(.{5})"')
+	for hash in r.findall(u):
+            image = urllib2.urlopen('http://i.imgur.com/'+hash+'.jpg').read()
+            with open(os.path.join(name,hash+'.jpg'),'w') as file:
+	        file.write(image)
+        

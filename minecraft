@@ -1,0 +1,8 @@
+#!/bin/bash
+
+MINECRAFTPATH=/home/$USER/.minecraft
+LAUNCHERPATH=minecraft.jar
+BACKUPPATH=/home/$USER/Dropbox/Minecraft/Backups
+
+java -jar $MINECRAFTPATH/$LAUNCHERPATH SuckyBlowfish jQ35uvJ4eE
+rdiff-backup $MINECRAFTPATH/saves $BACKUPPATH
